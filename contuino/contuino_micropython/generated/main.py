@@ -1,4 +1,4 @@
-# CONTUINO GENERATED CODE
+# CONTUINO GENERATED CODE, EDIT TEMPLATE IN /templates/main_template.py
 import network
 import time
 import urequests
@@ -9,13 +9,17 @@ API_URL = "http://%s:%s/contuino/api/boards"
 REMOVE_FIELDS_FOR_SERVER = ['wifi_ssid', 'wifi_password']
 
 station = network.WLAN(network.STA_IF)
-board_data = json.loads('{"board_port": "COM3", "baud_rate": 460800, "server_address": "192.168.5.16", "server_port": "5000", "wifi_ssid": "", "wifi_password": "", "user_hash": "testhash", "name": "board name", "message": "board message", "actions": [{"pin": 0, "analog": true, "event": "Events.SHOOT", "value": null, "sensor": "Sensors.TOUCH", "sensor_code": "XXXX1234"}, {"pin": 2, "analog": false, "event": "Events.SHOOT", "value": null, "sensor": "Sensors.TOUCH", "sensor_code": "XXXX1234"}]}')
+board_data = json.loads('{"board_port": "COM3", "baud_rate": 115200, "server_address": "192.168.0.11", "server_port": "5000", "wifi_ssid": "Dzoni", "wifi_password": "!dzonibrat%", "user_hash": "testhash", "name": "board name", "message": "board message", "actions": [{"pin": 0, "analog": true, "event": "Events.SHOOT", "value": null, "sensor": "Sensors.TOUCH", "sensor_code": "XXXX1234"}, {"pin": 2, "analog": false, "event": "Events.SHOOT", "value": null, "sensor": "Sensors.TOUCH", "sensor_code": "XXXX1234"}]}')
 
 ANALOG_MAX_VALUE = 1024
 ANALOG_MIN_VALUE = 0
+STR_WIFI_CONNECT_ATTEMPT = "attempting to connect to wifi"
+STR_CONNECTING_TO_WIFI = "connecting to wifi"
+STR_SENDING_DATA = "sending data"
 
 
 def ap_connect():
+    print(STR_CONNECTING_TO_WIFI)
     if station.isconnected() == True:
         print("Connected to AP", board_data['ssid'])
         print("ifconfig", station.ifconfig())
@@ -25,6 +29,7 @@ def ap_connect():
     station.connect(board_data['wifi_ssid'], board_data['wifi_password'])
 
     while station.isconnected() == False:
+        print(STR_WIFI_CONNECT_ATTEMPT)
         pass
 
 
@@ -59,6 +64,7 @@ def server_prepare_board_data(board_data_dict):
 
 def game_loop():
     while(True):
+        print(STR_SENDING_DATA)
         send_data()
 
 
@@ -71,6 +77,7 @@ def debug_board_data():
 
 def normalize_analog(value, max_value, min_value):
     return (value - min_value) / (max_value - min_value)
+
 
 # debug_board_data()
 ap_connect()

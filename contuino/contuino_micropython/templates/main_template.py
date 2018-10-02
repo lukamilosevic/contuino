@@ -1,4 +1,4 @@
-# CONTUINO GENERATED CODE
+# CONTUINO GENERATED CODE, EDIT TEMPLATE IN /templates/main_template.py
 import network
 import time
 import urequests
@@ -13,9 +13,13 @@ board_data = json.loads('%_BOARD_DATA_%')
 
 ANALOG_MAX_VALUE = 1024
 ANALOG_MIN_VALUE = 0
+STR_WIFI_CONNECT_ATTEMPT = "attempting to connect to wifi"
+STR_CONNECTING_TO_WIFI = "connecting to wifi"
+STR_SENDING_DATA = "sending data"
 
 
 def ap_connect():
+    print(STR_CONNECTING_TO_WIFI)
     if station.isconnected() == True:
         print("Connected to AP", board_data['ssid'])
         print("ifconfig", station.ifconfig())
@@ -25,6 +29,7 @@ def ap_connect():
     station.connect(board_data['wifi_ssid'], board_data['wifi_password'])
 
     while station.isconnected() == False:
+        print(STR_WIFI_CONNECT_ATTEMPT)
         pass
 
 
@@ -59,6 +64,7 @@ def server_prepare_board_data(board_data_dict):
 
 def game_loop():
     while(True):
+        print(STR_SENDING_DATA)
         send_data()
 
 
@@ -71,6 +77,7 @@ def debug_board_data():
 
 def normalize_analog(value, max_value, min_value):
     return (value - min_value) / (max_value - min_value)
+
 
 # debug_board_data()
 ap_connect()

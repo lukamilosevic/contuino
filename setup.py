@@ -10,15 +10,15 @@ from setuptools import find_packages, setup, Command
 # Package meta-data.
 NAME = 'contuino_client'
 DESCRIPTION = 'Contuino client.'
-#URL = 'https://github.com/me/myproject'
+URL = 'https://github.com/lukamilosevic/contuino'
 EMAIL = 'lukamilosevic.py@gmail.com'
 AUTHOR = 'Luka Milosevic'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.0.1dev'
+VERSION = '0.0.2dev'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    # 'requests',
+    'contuino_core',
 ]
 
 # What packages are optional?
@@ -80,7 +80,7 @@ class UploadCommand(Command):
         # self.status('Pushing git tags…')
         # os.system('git tag v{0}'.format(about['__version__']))
         # os.system('git push --tags')
-        
+
         sys.exit()
 
 
@@ -93,7 +93,7 @@ setup(
     author=AUTHOR,
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
-    #url=URL,
+    # url=URL,
     packages=find_packages(exclude=('tests',)),
     # If your package is a single module, use this instead of 'packages':
     # py_modules=['mypackage'],

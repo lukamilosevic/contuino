@@ -9,7 +9,9 @@ MP_DIR = os.path.dirname(os.path.realpath(__file__)) + os.sep
 MICROPYTHON_BIN = MP_DIR + "esp8266-20180511-v1.9.4.bin"
 
 TEMPLATES_FOLDER = MP_DIR + "templates" + os.sep
+GENERATED_FOLDER = MP_DIR + "generated" + os.sep
 MAIN_TEMPLATE = TEMPLATES_FOLDER + "main_template.py"
+
 
 def flash_micropython(port, baud_rate):
     call([sys.executable, '-m', 'esptool', '--port', port, 'erase_flash'])
@@ -31,18 +33,18 @@ def install_esptool():
 def deploy_main(port):
     # print help
     print("Deploying main script to board on port %s" % str(port))
-    call(['ampy', '--port', str(port), 'put', MP_DIR + 'main.py'])
+    call(['ampy', '--port', str(port), 'put', GENERATED_FOLDER + 'main.py'])
 
 
-def serial_prompt(port):
+def serial_prompt(port, baud_rate):
     print("Running putty serial prompt")
-    call(['putty', '-serial', "COM3"])
+    call(['putty', '-serial', str(port), '-sercfg', str(baud_rate)])
 
 
 def generate_main(board_data):
     print("Generating main.py script for the board")
     with open(MAIN_TEMPLATE, "rt") as fin:
-        with open(MP_DIR + "main.py", "wt") as fout:
+        with open(GENERATED_FOLDER + "main.py", "wt") as fout:
             for line in fin:
                 line = line.replace("%_BOARD_DATA_%", board_data)
                 fout.write(line)

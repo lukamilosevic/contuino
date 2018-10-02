@@ -9,18 +9,19 @@ DEFAULT_BAUD_RATE = 115200
 INFO_RUN_ONCE = "\r\nYou only need to flash micropython firmware once\r\n"
 INFO_PORT_MISSING = "\r\nBoard port missing. Check device manager on Windows and lsusb on unix\r\n"
 
+
 class MyBoard(Board):
     """MyBoard class"""
     baud_rate = DEFAULT_BAUD_RATE
 
-    def __init__(self, board_port=None, baud_rate=DEFAULT_BAUD_RATE, server_address=None, server_port=None, wifi_ssid=None, wifi_password=None, user_hash=None, name=None, message=None, actions=[]):
+    def __init__(self, board_port=None, baud_rate=DEFAULT_BAUD_RATE, server_address=None, server_port=None, wifi_ssid=None, wifi_password=None, username=None, name=None, message=None, actions=[]):
         self.board_port = board_port
         self.baud_rate = baud_rate
         self.server_address = server_address
         self.server_port = server_port
         self.wifi_ssid = wifi_ssid
         self.wifi_password = wifi_password
-        super().__init__(user_hash, name, message, actions)
+        super().__init__(username, name, message, actions)
 
     def flash_micropython(self):
         print(INFO_RUN_ONCE)
@@ -36,7 +37,8 @@ class MyBoard(Board):
         mp_helpers.deploy_main(self.board_port)
 
     def putty_serial_prompt(self):
-        mp_helpers.serial_prompt(self.board_port)
+        mp_helpers.serial_prompt(self.board_port, self.baud_rate)
+
 
 class GpioAction(Action):
 

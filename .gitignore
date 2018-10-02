@@ -1,5 +1,6 @@
 nosetests/
-contuino_core.egg-info/
+*.egg-info/
 build/
 dist/
 __pycache__
+env/
