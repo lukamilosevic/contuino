@@ -9,7 +9,7 @@ API_URL = "http://%s:%s/contuino/api/boards"
 REMOVE_FIELDS_FOR_SERVER = ['wifi_ssid', 'wifi_password']
 
 station = network.WLAN(network.STA_IF)
-board_data = json.loads('{"board_port": "COM3", "baud_rate": 115200, "server_address": "192.168.0.11", "server_port": "5000", "wifi_ssid": "Dzoni", "wifi_password": "!dzonibrat%", "user_hash": "testhash", "name": "board name", "message": "board message", "actions": [{"pin": 0, "analog": true, "event": "Events.SHOOT", "value": null, "sensor": "Sensors.TOUCH", "sensor_code": "XXXX1234"}, {"pin": 2, "analog": false, "event": "Events.SHOOT", "value": null, "sensor": "Sensors.TOUCH", "sensor_code": "XXXX1234"}]}')
+board_data = json.loads('{"board_port": "COM3", "baud_rate": 115200, "server_address": "192.168.0.11", "server_port": "", "wifi_ssid": "", "wifi_password": "", "username": "testhash", "name": "board name", "message": "board message", "actions": [{"pin": 2, "analog": false, "event": "Events.SHOOT", "value": null, "sensor": "Sensors.TOUCH", "sensor_code": "XXXX1234"}, {"pin": 0, "analog": true, "event": "Events.SHOOT", "value": null, "sensor": "Sensors.TOUCH", "sensor_code": "XXXX1234"}]}')
 
 ANALOG_MAX_VALUE = 1024
 ANALOG_MIN_VALUE = 0

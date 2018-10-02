@@ -8,13 +8,13 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = 'contuino_client'
+NAME = 'contuino'
 DESCRIPTION = 'Contuino client.'
 URL = 'https://github.com/lukamilosevic/contuino'
 EMAIL = 'lukamilosevic.py@gmail.com'
 AUTHOR = 'Luka Milosevic'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.0.2dev'
+VERSION = '0.0.5dev'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -85,6 +85,8 @@ class UploadCommand(Command):
 
 
 setup(
+    data_files=[('micropython_bin', ['contuino/contuino_micropython/esp8266-20180511-v1.9.4.bin']),
+                ('micropython_main_template', ['contuino/contuino_micropython/templates/main_template.py'])],
     name=NAME,
     version=about['__version__'],
     description=DESCRIPTION,
